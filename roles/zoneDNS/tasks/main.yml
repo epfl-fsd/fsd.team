@@ -1,16 +1,34 @@
 - include_vars: zoneDNS-vars.yml
   tags: always
-  
+
+- name: Print gandi API key
+  ansible.builtin.debug:
+    msg: "Gandi API key is {{ fsdteam_secrets.gandiAPIkey }}"
+  tags: always
+
 - name: Create a test A record to point to the choosen IP in the fsd.team domain
   community.general.gandi_livedns:
-    domain: dev.fsd.team
-    record: Redirect
+    domain: fsd.team
+    record: dev
     type: A
     values:
     - 127.0.0.1
     ttl: 7200
     api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
   register: record
+  tags: dev
+
+- name: Create a test A record to point to the choosen IP in the fsd.team domain
+  community.general.gandi_livedns:
+    domain: fsd.team
+    record: "*.dev"
+    type: A
+    values:
+    - 127.0.0.1
+    ttl: 7200
+    api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
+  register: record
+  tags: star
 
 - name: Create a mail CNAME record to specific domain
   community.general.gandi_livedns:
