@@ -1,5 +1,5 @@
 - name: Manage DNSzone
-  hosts: all
+  hosts: dns_gandi
   gather_facts: no
   roles:
     - role: roles/zoneDNS
