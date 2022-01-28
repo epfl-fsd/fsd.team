@@ -1,0 +1,3 @@
+fsdteam_secrets: >-
+  {{ lookup("file", "/keybase/team/epfl_idevfsd/gandi/fsd.team/fsdteam_secrets.yml") |
+     from_yaml }}

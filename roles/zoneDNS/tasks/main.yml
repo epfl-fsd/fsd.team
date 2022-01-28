@@ -1,0 +1,25 @@
+- include_vars: zoneDNS-vars.yml
+  tags: always
+  
+- name: Create a test A record to point to the choosen IP in the fsd.team domain
+  community.general.gandi_livedns:
+    domain: dev.fsd.team
+    record: Redirect
+    type: A
+    values:
+    - 127.0.0.1
+    ttl: 5
+    api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
+  register: record
+
+- name: Create a mail CNAME record to specific domain
+  community.general.gandi_livedns:
+    domain: fsd.team
+    record: test
+    type: CNAME
+    values:
+    - dev
+    ttl: 7200
+    api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
+    state: present
+  tags: "test"
