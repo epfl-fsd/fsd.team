@@ -37,7 +37,8 @@ platform_check () {
       curl https://raw.githubusercontent.com/epfl-si/ansible.suitcase/master/install.sh | \
             SUITCASE_ANSIBLE_VERSION=4.0.0 \
             SUITCASE_DIR=$PWD/ansible-deps-cache \
-            SUITCASE_PIP_EXTRA="bcrypt passlib openshift" \
+            SUITCASE_PIP_EXTRA="cryptography" \
+            SUITCASE_PYTHON_VERSION="3.8.10" \
             SUITCASE_ANSIBLE_REQUIREMENTS=requirements.yml \
             SUITCASE_NO_EYAML=1 \
             bash -x
