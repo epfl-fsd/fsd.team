@@ -6,7 +6,7 @@
     msg: "Gandi API key is {{ fsdteam_secrets.gandiAPIkey }}"
   tags: always
 
-- name: Create the “www” record to 86.119.37.202
+- name: Create the “www.fsd.team” record to 86.119.37.202
   community.general.gandi_livedns:
     domain: fsd.team
     record: www
@@ -18,41 +18,17 @@
   register: record
   tags: www
 
-- name: Alias “*.fsd.team” to www.fsd.team
+- name: Create the fsd.team” record to 86.119.37.202
   community.general.gandi_livedns:
     domain: fsd.team
-    record: '*'
-    type: CNAME
+    record: fsd.team
+    type: A
     values:
-      - www
+      - 86.119.37.202
     ttl: 300
     api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
-    state: present
-  tags: test
-
-# - name: Create the “@” record to 86.119.37.202
-#   community.general.gandi_livedns:
-#     domain: fsd.team
-#     record: '@'
-#     type: A
-#     values:
-#       - 86.119.37.202
-#     ttl: 300
-#     api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
-#   register: record
-#   tags: www
-# 
-# - name: Create the “*” record to 86.119.37.202
-#   community.general.gandi_livedns:
-#     domain: fsd.team
-#     record: '*'
-#     type: A
-#     values:
-#       - 86.119.37.202
-#     ttl: 300
-#     api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
-#   register: record
-#   tags: www
+  register: record
+  tags: www
 
 - name: Create the “dev” A record to point to localhost
   community.general.gandi_livedns:
@@ -77,15 +53,3 @@
     api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
   register: record
   tags: star
-
-- name: Create a mail CNAME record to specific domain
-  community.general.gandi_livedns:
-    domain: fsd.team
-    record: test
-    type: CNAME
-    values:
-    - dev
-    ttl: 7200
-    api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
-    state: present
-  tags: test
