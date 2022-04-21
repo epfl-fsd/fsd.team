@@ -4,6 +4,6 @@
 # https://caddyserver.com/docs/modules/dns.providers.gandi
 # https://github.com/caddy-dns/gandi
 #
-www.fsd.team, mmm.fsd.team {
+fsd.team, www.fsd.team, mmm.fsd.team {
   file_server *
 }

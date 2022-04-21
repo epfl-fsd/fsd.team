@@ -18,7 +18,7 @@
   register: record
   tags: www
 
-- name: Create the fsd.team” record to 86.119.37.202
+- name: Create the “fsd.team” record to 86.119.37.202
   community.general.gandi_livedns:
     domain: fsd.team
     record: fsd.team
