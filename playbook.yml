@@ -5,3 +5,9 @@
     - role: roles/zoneDNS
   tags: gandi
 
+- name: Manage hosting VM
+  hosts: switchvm
+  gather_facts: no
+  roles:
+    - role: roles/hosting
+  tags: vm

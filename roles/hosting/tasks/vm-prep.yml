@@ -1,0 +1,88 @@
+- name: Update and upgrade apt packages
+  become: true
+  apt:
+    upgrade: yes
+    update_cache: yes
+    cache_valid_time: 86400
+
+- name: Install essential packages
+  become: true
+  apt:
+    package:
+      - bash-completion
+      - curl
+      - git
+      - htop
+      - iputils-arping
+      - iputils-ping
+      - jq
+      - less
+      - libnss3-tools
+      - logrotate
+      - net-tools
+      - netcat
+      - make
+      - openssl
+      - pwgen
+      - silversearcher-ag
+      - telnet
+      - tmux
+      - tree
+      - vim
+      - wget
+      - xdiskusage
+
+- name: Add Docker GPG apt Key
+  become: true
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker Repository
+  become: true
+  apt_repository:
+    repo: deb https://download.docker.com/linux/ubuntu focal stable
+    state: present
+
+- name: Install Docker required system packages
+  become: true
+  apt:
+    package:
+      - apt-transport-https
+      - ca-certificates
+      - software-properties-common
+      - python3-pip
+      - virtualenv
+      - python3-setuptools
+      - docker-ce
+    state: latest
+    update_cache: true
+
+- name: Install Docker Module for Python
+  become: true
+  pip:
+    name: docker
+
+# From https://ops.tips/blog/docker-ansible-role/
+# If you use something like `docker swarm mode` it's
+# very common to have dangling containers around.
+# By setting a cron job to clean thing ups every N
+# hours we make sure that dangling containers don't 
+# stay around for too long.
+- name: Set periodic docker system prune
+  cron:
+    name: 'docker-prune'
+    minute: '0'
+    hour: '*/2'
+    job: 'docker container prune -f'
+
+- name: Add ubuntu user to docker group
+  become: true
+  user:
+    name: 'ubuntu'
+    groups: 'docker'
+    append: 'yes'
+
+# TODO: configure logrotate
+# TODO: configure limit journalctf logs size
+# TODO: SendEnv GIT_*

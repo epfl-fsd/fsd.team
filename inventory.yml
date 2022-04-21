@@ -3,3 +3,7 @@ all:
     dns_gandi:
       ansible_connection: local
       ansible_python_interpreter: "{{ ansible_playbook_python }}"
+    switchvm:
+      ansible_host: 86.119.37.202
+      ansible_port: 22
+      ansible_user: ubuntu

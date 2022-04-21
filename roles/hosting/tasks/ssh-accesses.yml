@@ -1,0 +1,19 @@
+
+# PermaYellow? https://github.com/ansible-collections/ansible.posix/issues/327
+- name: Set authorized keys (ubuntu)
+  ansible.posix.authorized_key:
+    user: ubuntu
+    state: present
+    key: "https://github.com/{{ item }}.keys"
+    comment: " # imported from GitHub@{{ item }}.keys"
+  with_items: "{{ fsd_team }}"
+
+# PermaYellow? https://github.com/ansible-collections/ansible.posix/issues/327
+- name: Set authorized keys (root)
+  become: true
+  ansible.posix.authorized_key:
+    user: root
+    state: present
+    key: "https://github.com/{{ item }}.keys"
+    comment: " # imported from GitHub@{{ item }}.keys"
+  with_items: "{{ fsd_team }}"

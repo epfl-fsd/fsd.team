@@ -1,0 +1,17 @@
+- include_vars: ../vars/main.yml
+  tags:
+    - always
+
+- name: Prepare the VM
+  import_tasks:
+    file: vm-prep.yml
+  tags:
+    - vm-prep
+
+- name: FSD team's accesses
+  import_tasks:
+    file: ssh-accesses.yml
+  tags:
+    - never
+    - ssh
+
