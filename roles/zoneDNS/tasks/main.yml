@@ -6,7 +6,55 @@
     msg: "Gandi API key is {{ fsdteam_secrets.gandiAPIkey }}"
   tags: always
 
-- name: Create a test A record to point to the choosen IP in the fsd.team domain
+- name: Create the “www” record to 86.119.37.202
+  community.general.gandi_livedns:
+    domain: fsd.team
+    record: www
+    type: A
+    values:
+      - 86.119.37.202
+    ttl: 300
+    api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
+  register: record
+  tags: www
+
+- name: Alias “*.fsd.team” to www.fsd.team
+  community.general.gandi_livedns:
+    domain: fsd.team
+    record: '*'
+    type: CNAME
+    values:
+      - www
+    ttl: 300
+    api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
+    state: present
+  tags: test
+
+# - name: Create the “@” record to 86.119.37.202
+#   community.general.gandi_livedns:
+#     domain: fsd.team
+#     record: '@'
+#     type: A
+#     values:
+#       - 86.119.37.202
+#     ttl: 300
+#     api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
+#   register: record
+#   tags: www
+# 
+# - name: Create the “*” record to 86.119.37.202
+#   community.general.gandi_livedns:
+#     domain: fsd.team
+#     record: '*'
+#     type: A
+#     values:
+#       - 86.119.37.202
+#     ttl: 300
+#     api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
+#   register: record
+#   tags: www
+
+- name: Create the “dev” A record to point to localhost
   community.general.gandi_livedns:
     domain: fsd.team
     record: dev
@@ -18,7 +66,7 @@
   register: record
   tags: dev
 
-- name: Create a test A record to point to the choosen IP in the fsd.team domain
+- name: Create the “*.dev” A record to point to localhost
   community.general.gandi_livedns:
     domain: fsd.team
     record: "*.dev"
@@ -40,4 +88,4 @@
     ttl: 7200
     api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
     state: present
-  tags: "test"
+  tags: test
