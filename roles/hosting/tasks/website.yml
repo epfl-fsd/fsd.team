@@ -1,0 +1,13 @@
+
+- name: Setup the {{ directory_root_path }} directory
+  become: true
+  ansible.builtin.file:
+    path: "{{ directory_root_path }}"
+    state: directory
+    mode: '0755'
+    owner: "{{ ansible_user }}"
+
+- name: Copy index.html to {{ directory_root_path }}
+  ansible.builtin.copy:
+    src: ../files/index.html
+    dest: "{{ directory_root_path }}"

@@ -15,3 +15,9 @@
     - never
     - ssh
 
+- name: Website
+  import_tasks:
+    file: website.yml
+  tags:
+    - website
+

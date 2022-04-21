@@ -14,3 +14,4 @@ fsd_team:
   - williambelle
   - zuzu59
 
+directory_root_path: /srv/fsd.team
