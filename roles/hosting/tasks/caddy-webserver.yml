@@ -1,0 +1,19 @@
+- name: Copy Caddyfile to {{ directory_root_path }}
+  ansible.builtin.copy:
+    src: ../files/Caddyfile
+    dest: "{{ directory_root_path }}"
+
+# https://matduggan.com/easier-alternative-to-nginx-lets-encrypt-with-caddy/
+- name: Caddy webserver
+  # https://docs.ansible.com/ansible/latest/collections/community/docker/docker_container_module.html#ansible-collections-community-docker-docker-container-module
+  community.docker.docker_container:
+    name: fsd.team
+    image: caddy:2.4.6-alpine
+    state: started
+    restart: yes
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - "{{ directory_root_path }}:/srv"
+      - "{{ directory_root_path }}/Caddyfile:/etc/caddy/Caddyfile"

@@ -1,0 +1,9 @@
+# TODO: use a wildcard certificate
+# Please read https://caddyserver.com/docs/caddyfile/patterns#wildcard-certificates
+# https://caddy.community/t/how-to-use-dns-provider-modules-in-caddy-2/8148
+# https://caddyserver.com/docs/modules/dns.providers.gandi
+# https://github.com/caddy-dns/gandi
+#
+www.fsd.team, mmm.fsd.team {
+  file_server *
+}

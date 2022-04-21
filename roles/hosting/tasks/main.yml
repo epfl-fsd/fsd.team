@@ -21,3 +21,9 @@
   tags:
     - website
 
+- name: Caddy webserver
+  import_tasks:
+    file: caddy-webserver.yml
+  tags:
+    - webserver
+    - caddy
