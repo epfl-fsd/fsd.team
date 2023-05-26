@@ -53,3 +53,51 @@
     api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
   register: record
   tags: star
+
+- name: Create the ”noc.fsd.team” record to 86.119.37.70
+  community.general.gandi_livedns:
+    domain: fsd.team
+    record: noc
+    type: A
+    values:
+      - 86.119.37.70
+    ttl: 300
+    api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
+  tags: noc
+
+- name: Create the “*.noc” CNAME record to point to *.noc.fsd.team
+  community.general.gandi_livedns:
+    domain: fsd.team
+    record: "*.noc"
+    type: CNAME
+    values:
+      - noc
+    ttl: 300
+    api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
+  tags: noc
+
+- name: Create the ”noc-test.fsd.team” record to 86.119.39.25
+  community.general.gandi_livedns:
+    domain: fsd.team
+    record: noc-test
+    type: A
+    values:
+      - 86.119.39.25
+    ttl: 300
+    api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
+  tags: 
+    - noc
+    - noc-test
+
+- name: Create the “*.noc-test” CNAME record to point to *.noc-test.fsd.team
+  community.general.gandi_livedns:
+    domain: fsd.team
+    record: "*.noc-test"
+    type: CNAME
+    values:
+      - noc-test
+    ttl: 300
+    api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
+  tags: 
+    - noc
+    - noc-test
