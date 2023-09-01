@@ -101,3 +101,32 @@
   tags: 
     - noc
     - noc-test
+
+- name: Ensure DNS records for canap test and staging environments
+  community.general.gandi_livedns:
+    domain: fsd.team
+    record: "{{ item.record }}"
+    type: "{{ item.type | default('A') }}"
+    state: "{{ item.state | default('present') }}"
+    values:
+      - "{{ item.value }}"
+    ttl: 300
+    api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
+  with_items:
+    - record: canap-test-vm
+      value: 10.95.96.134
+    - record: canap-prod-vm
+      value: 128.178.218.242
+    - record: canap
+      value: canap-test-vm
+      type: CNAME
+    - record: pcanap
+      value: canap-prod-vm
+      type: CNAME
+    # - record: canap-gest
+    #   value: canap-test-vm
+    #   type: CNAME
+    #   state: absent
+  tags: 
+    - canap
+
