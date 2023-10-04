@@ -167,6 +167,9 @@
     - record: evdemo3
       value: ev10
       type: CNAME
+    - record: evdemo4
+      value: ev08
+      type: CNAME
 
   tags: 
     - evoting
