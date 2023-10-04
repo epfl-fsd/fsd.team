@@ -130,3 +130,43 @@
   tags: 
     - canap
 
+- name: Ensure DNS records electronic voting
+  community.general.gandi_livedns:
+    domain: fsd.team
+    record: "{{ item.record }}"
+    type: "{{ item.type | default('A') }}"
+    state: "{{ item.state | default('present') }}"
+    values:
+      - "{{ item.value }}"
+    ttl: 300
+    api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
+  with_items:
+    - record: ev03
+      value: 10.95.96.145
+    - record: ev04
+      value: 10.95.96.146
+    - record: ev05
+      value: 10.95.96.147
+    - record: ev06
+      value: 10.95.96.148
+    - record: ev08
+      value: 10.95.96.167
+    - record: ev09
+      value: 10.95.96.166
+    - record: ev10
+      value: 10.95.96.173
+    - record: ev11
+      value: 10.95.96.174
+
+    - record: evdemo1
+      value: ev08
+      type: CNAME
+    - record: evdemo2
+      value: ev09
+      type: CNAME
+    - record: evdemo3
+      value: ev10
+      type: CNAME
+
+  tags: 
+    - evoting
