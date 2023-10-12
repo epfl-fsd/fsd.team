@@ -158,6 +158,10 @@
     - record: ev11
       value: 10.95.96.174
 
+    - record: evdemo
+      value: ev08
+      type: CNAME
+
     - record: evdemo1
       value: ev08
       type: CNAME
@@ -171,5 +175,17 @@
       value: ev08
       type: CNAME
 
+    - record: evdemo1n
+      value: ev08
+      type: CNAME
+    - record: evdemo2n
+      value: ev09
+      type: CNAME
+    - record: evdemo3n
+      value: ev10
+      type: CNAME
+    - record: evdemo4n
+      value: ev08
+      type: CNAME
   tags: 
     - evoting
