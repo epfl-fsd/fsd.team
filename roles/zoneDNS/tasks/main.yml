@@ -162,6 +162,10 @@
       value: ev08
       type: CNAME
 
+    - record: dvoting
+      value: ev08
+      type: CNAME
+
     - record: evdemo1
       value: ev08
       type: CNAME
