@@ -197,3 +197,15 @@
       type: CNAME
   tags: 
     - evoting
+
+- name: Create the ”wpleo.fsd.team” record to 86.119.27.175
+  community.general.gandi_livedns:
+    domain: fsd.team
+    record: wpleo
+    type: A
+    values:
+      - 86.119.27.175
+    ttl: 300
+    api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
+  tags: 
+    - wpleo
