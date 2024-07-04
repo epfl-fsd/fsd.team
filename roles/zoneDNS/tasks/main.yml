@@ -209,3 +209,15 @@
     api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
   tags: 
     - wpleo
+
+- name: Create the ”lhd-test.fsd.team” record
+  community.general.gandi_livedns:
+    domain: fsd.team
+    record: lhd-test
+    type: A
+    values:
+      - 128.178.109.25
+    ttl: 300
+    api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
+  tags:
+    - lhd
