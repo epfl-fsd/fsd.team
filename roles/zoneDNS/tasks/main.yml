@@ -36,7 +36,7 @@
     record: dev
     type: A
     values:
-    - 127.0.0.1
+      - 127.0.0.1
     ttl: 7200
     api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
   register: record
@@ -48,7 +48,7 @@
     record: "*.dev"
     type: A
     values:
-    - 127.0.0.1
+      - 127.0.0.1
     ttl: 7200
     api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
   register: record
@@ -85,7 +85,7 @@
       - 86.119.39.25
     ttl: 300
     api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
-  tags: 
+  tags:
     - noc
     - noc-test
 
@@ -98,7 +98,7 @@
       - noc-test
     ttl: 300
     api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
-  tags: 
+  tags:
     - noc
     - noc-test
 
@@ -127,8 +127,28 @@
     #   value: canap-test-vm
     #   type: CNAME
     #   state: absent
-  tags: 
+  tags:
     - canap
+
+- name: Ensure DNS records for new EPFL people
+  community.general.gandi_livedns:
+    domain: fsd.team
+    record: "{{ item.record }}"
+    type: "{{ item.type | default('A') }}"
+    state: "{{ item.state | default('present') }}"
+    values:
+      - "{{ item.value }}"
+    ttl: 1800
+    api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
+  tags:
+    - peonext
+  with_items:
+    - record: peonext
+      value: itspeopl0003.xaas.epfl.ch.
+      type: CNAME
+    - record: peofik
+      value: peonext
+      type: CNAME
 
 - name: Ensure DNS records electronic voting
   community.general.gandi_livedns:
@@ -159,43 +179,47 @@
       value: 10.95.96.174
 
     - record: evdemo
-      value: ev08
+      value: ev03
       type: CNAME
 
     - record: dvoting
+      value: ev03
+      type: CNAME
+
+    - record: evprodtraefik
       value: ev08
       type: CNAME
 
-    - record: evtraefik
-      value: ev08
+    - record: evdemotraefik
+      value: ev03
       type: CNAME
 
     - record: evdemo1
-      value: ev08
+      value: ev03
       type: CNAME
     - record: evdemo2
-      value: ev09
+      value: ev04
       type: CNAME
     - record: evdemo3
-      value: ev10
+      value: ev05
       type: CNAME
     - record: evdemo4
-      value: ev11
+      value: ev06
       type: CNAME
 
     - record: evdemo1n
-      value: ev08
+      value: ev03
       type: CNAME
     - record: evdemo2n
-      value: ev09
+      value: ev04
       type: CNAME
     - record: evdemo3n
-      value: ev10
+      value: ev05
       type: CNAME
     - record: evdemo4n
-      value: ev11
+      value: ev06
       type: CNAME
-  tags: 
+  tags:
     - evoting
 
 - name: Create the ”wpleo.fsd.team” record to 86.119.27.175
