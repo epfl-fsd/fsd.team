@@ -149,6 +149,9 @@
     - record: peofik
       value: peonext
       type: CNAME
+    - record: peoak
+      value: peonext
+      type: CNAME
 
 - name: Ensure DNS records electronic voting
   community.general.gandi_livedns:
