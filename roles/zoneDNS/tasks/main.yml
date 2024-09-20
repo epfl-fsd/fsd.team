@@ -275,3 +275,16 @@
     api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
   tags: 
     - gitlab
+
+- name: "*.wpn.fsd.team"
+  community.general.gandi_livedns:
+    domain: fsd.team
+    record: "*.wpn"
+    type: A
+    values:
+      - 128.178.218.233
+      - 128.178.218.249
+    ttl: 300
+    api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
+  tags: 
+    - wp-next
