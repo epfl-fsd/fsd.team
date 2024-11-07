@@ -303,3 +303,29 @@
   tags:
     - wp-next
     - wpn
+
+- name: "*.apps.okd-test.fsd.team"
+  community.general.gandi_livedns:
+    domain: fsd.team
+    record: "*.apps.okd-test"
+    type: A
+    values:
+      # This is the IP of itswbhst0025
+      - 10.95.96.118
+    ttl: 300
+    api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
+  tags:
+    - okd
+
+- name: "api-int.okd-test.fsd.team"
+  community.general.gandi_livedns:
+    domain: fsd.team
+    record: "api-int.okd-test"
+    type: A
+    values:
+      # This is the IP of itswbhst0025
+      - 10.95.96.118
+    ttl: 300
+    api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
+  tags:
+    - okd
