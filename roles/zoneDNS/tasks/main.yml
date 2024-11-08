@@ -317,10 +317,10 @@
   tags:
     - okd
 
-- name: "api-int.okd-test.fsd.team"
+- name: "api{,-int}.okd-test.fsd.team"
   community.general.gandi_livedns:
     domain: fsd.team
-    record: "api-int.okd-test"
+    record: "{{ item }}.okd-test"
     type: A
     values:
       # This is the IP of itswbhst0025
@@ -329,3 +329,6 @@
     api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
   tags:
     - okd
+  with_items:
+    - api-int   # For access from within OpenShift
+    - api       # For access with kubectl / oc etc. from the operator's workstation
