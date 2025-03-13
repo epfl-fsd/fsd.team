@@ -282,8 +282,7 @@
     record: "wpn"
     type: A
     values:
-      - 128.178.218.233
-      - 128.178.218.249
+      - 10.95.96.118
     ttl: 300
     api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
   tags:
@@ -296,8 +295,7 @@
     record: "*.wpn"
     type: A
     values:
-      - 128.178.218.233
-      - 128.178.218.249
+      - 10.95.96.118
     ttl: 300
     api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
   tags:
