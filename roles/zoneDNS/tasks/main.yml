@@ -146,6 +146,12 @@
     - record: peonext
       value: itspeopl0003.xaas.epfl.ch.
       type: CNAME
+    - record: peofana
+      value: peonext
+      type: CNAME
+    - record: peotheus
+      value: peonext
+      type: CNAME
     - record: peofik
       value: peonext
       type: CNAME
