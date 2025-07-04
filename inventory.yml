@@ -6,4 +6,4 @@ all:
     switchvm:
       ansible_host: 86.119.37.202
       ansible_port: 22
-      ansible_user: ubuntu
+      ansible_user: root
