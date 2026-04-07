@@ -311,6 +311,30 @@
     - wp-next
     - wpn
 
+- name: "wp-traces-test.fsd.team"
+  community.general.gandi_livedns:
+    domain: fsd.team
+    record: "wp-traces-test"
+    type: A
+    values:
+      - 10.98.42.205
+    ttl: 300
+    api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
+  tags:
+    - wp-traces
+
+- name: "wp-traces.fsd.team"
+  community.general.gandi_livedns:
+    domain: fsd.team
+    record: "wp-traces"
+    type: A
+    values:
+      - 10.98.42.206
+    ttl: 300
+    api_key: "{{ fsdteam_secrets.gandiAPIkey }}"
+  tags:
+    - wp-traces
+
 - name: "*.apps.okd-test.fsd.team"
   community.general.gandi_livedns:
     domain: fsd.team
